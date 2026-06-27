@@ -1,0 +1,88 @@
+# Codebase Skill Configuration
+# ================================
+
+# --- Indexing ---
+index:
+  # File extensions to index (by language)
+  extensions:
+    - ".py"
+    - ".js"
+    - ".ts"
+    - ".jsx"
+    - ".tsx"
+
+  # Directories to exclude from indexing
+  exclude_dirs:
+    - "__pycache__"
+    - "node_modules"
+    - ".git"
+    - ".venv"
+    - "venv"
+    - ".env"
+    - "dist"
+    - "build"
+    - ".code-kb"
+
+  # File patterns to exclude
+  exclude_patterns:
+    - "*.min.js"
+    - "*.test.*"
+    - "*.spec.*"
+    - "*/migrations/*"
+
+  # Max file size to index (bytes), skip larger files
+  max_file_size: 1048576  # 1 MB
+
+# --- Chunking ---
+chunking:
+  # Max chunk size in lines (fallback when AST parsing fails)
+  max_chunk_lines: 100
+
+  # Min chunk size in lines (merge smaller adjacent chunks)
+  min_chunk_lines: 3
+
+# --- Embedding ---
+embedding:
+  model: "BAAI/bge-small-en-v1.5"
+  dimension: 384
+  batch_size: 32
+  # ONNX model cache directory
+  cache_dir: ".code-kb/models"
+
+# --- Retrieval ---
+retrieval:
+  # Top-K results to return after RRF fusion
+  top_k: 5
+
+  # Candidate pool multiplier (fetch top_k * candidate_multiplier per channel)
+  candidate_multiplier: 2
+
+  # RRF constant k
+  rrf_k: 60
+
+  # Context expansion limits
+  context:
+    max_callers: 3
+    max_callees: 5
+    max_siblings: 10
+
+# --- Query Rewriting ---
+rewrite:
+  # Model for query rewriting (Haiku recommended for speed)
+  model: "claude-haiku-4-5-20251001"
+
+  # Semantic distance thresholds for confirmation gate
+  confirmation:
+    small_distance_threshold: 0.3   # Skip confirmation below this
+    large_distance_threshold: 0.7   # Require confirmation above this
+
+# --- Storage ---
+storage:
+  # LanceDB storage directory (relative to project root)
+  db_path: ".code-kb/lancedb"
+
+  # Index snapshot file
+  snapshot_file: ".code-kb/snapshot.json"
+
+  # Dependency graph file
+  graph_file: ".code-kb/graph.json"

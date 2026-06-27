@@ -1,0 +1,31 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Codebase skill index data (generated per-project, not part of the skill)
+.code-kb/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# ONNX model cache
+bge-small-onnx/
+*.onnx
+
+# Distribution
+dist/
+build/
+*.egg-info/

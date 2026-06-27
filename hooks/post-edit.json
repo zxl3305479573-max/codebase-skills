@@ -1,0 +1,16 @@
+{
+  "_comment": "Copy this into your project's .claude/settings.json. Update the script path to match your codebase-skills installation directory.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"<PATH-TO>/codebase-skills/scripts/index.py\" --incremental --file \"$CLAUDE_FILE_PATH\" --project \"$CLAUDE_PROJECT_DIR\""
+          }
+        ]
+      }
+    ]
+  }
+}
